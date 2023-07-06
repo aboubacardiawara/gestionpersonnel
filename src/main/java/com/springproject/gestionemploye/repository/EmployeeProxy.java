@@ -57,4 +57,52 @@ public class EmployeeProxy {
         return response.getBody();
     }
 
+    public Employee getEmployee(int id) {
+
+        String baseApiUrl = props.getApiUrl();
+        String getEmployeeByIdUrl = baseApiUrl + "/employee/" + id;
+        
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Employee> response = restTemplate.exchange(
+                getEmployeeByIdUrl,
+                HttpMethod.GET,
+                null,
+                Employee.class
+                );
+
+        log.debug("Get employees call " + response.getStatusCode().toString());
+        return response.getBody();
+    }
+
+    public void deleteEmployee(int id) {
+        String baseApiUrl = props.getApiUrl();
+        String getEmployeeByIdUrl = baseApiUrl + "/employee/" + id;
+        
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Employee> response = restTemplate.exchange(
+                getEmployeeByIdUrl,
+                HttpMethod.DELETE,
+                null,
+                Employee.class
+                );
+
+        log.debug("Get employees call " + response.getStatusCode().toString());
+    }
+
+    public Employee updateEmployee(Employee employee) {
+        String baseApiUrl = props.getApiUrl();
+        String getEmployeeByIdUrl = baseApiUrl + "/employee/" + employee.getId();
+        
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Employee> response = restTemplate.exchange(
+                getEmployeeByIdUrl,
+                HttpMethod.PUT,
+                null,
+                Employee.class
+                );
+
+        log.debug("Get employees call " + response.getStatusCode().toString());
+        return response.getBody();
+    }
+
 }
